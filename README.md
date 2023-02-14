@@ -1,4 +1,4 @@
-### This Web Application was developed using C#, ASP.Net framework, HTML/CSS and SQL Server.
+### This Web Application was developed using C#, ASP.Net framework, HTML/CSS/JS and SQL Server.
 
 ### By: Marko Kushta
 ---

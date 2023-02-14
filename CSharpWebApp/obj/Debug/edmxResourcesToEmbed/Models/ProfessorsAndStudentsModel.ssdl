@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentsAndProfessorsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Professors">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Full Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="E-Mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Faculty" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Full Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="E-Mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Faculty" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="Subject" />
+    </Key>
+    <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Professors_Subject">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Professors" Type="Self.Professors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="Subject" />
+      </Principal>
+      <Dependent Role="Professors">
+        <PropertyRef Name="Subject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Subject">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="Subject" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Subject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentsAndProfessorsModelStoreContainer">
+    <EntitySet Name="Professors" EntityType="Self.Professors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Professors_Subject" Association="Self.FK_Professors_Subject">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Professors" EntitySet="Professors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Subject" Association="Self.FK_Student_Subject">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
